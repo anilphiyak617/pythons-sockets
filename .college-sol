@@ -1,0 +1,12 @@
+from socket import *
+s = socket(AF_INET, SOCK_STREAM)
+s.bind(('127.0.0.1', 12000))
+s.listen(1)
+print 'The server is ready'
+while True:
+	connectionSocket, addr = s.accept()
+	print ("conenction from:" + str(addr))
+	sentence = connectionSocket.recv(1024).decode()
+	data = sentence.upper()
+	connectionSocket.send(data.encode())
+	connectionSocket.close()
